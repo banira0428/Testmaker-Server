@@ -3,7 +3,7 @@ use std::sync::Arc;
 
 use tokio::sync::Mutex;
 
-use crate::User;
+use super::models::Test;
 
 pub type Database = Arc<Mutex<HashMap<u64, Test>>>;
 

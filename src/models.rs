@@ -1,6 +1,8 @@
+use serde::{Serialize, Deserialize};
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
-struct Test {
-    id: u64,
+pub struct Test {
+    pub(crate) id: u64,
     name: String,
     color: u8,
     document_id: String,
