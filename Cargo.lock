@@ -977,7 +977,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "testmaker-rust"
+name = "testmaker_rust"
 version = "0.1.0"
 dependencies = [
  "serde",

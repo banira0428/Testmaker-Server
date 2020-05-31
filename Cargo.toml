@@ -1,5 +1,5 @@
 [package]
-name = "testmaker-rust"
+name = "testmaker_rust"
 version = "0.1.0"
 authors = ["ke-ta <banira0428@gmail.com>"]
 edition = "2018"
