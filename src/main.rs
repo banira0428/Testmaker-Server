@@ -15,6 +15,6 @@ use routes::*;
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![tests])  // ここにルーティングをセットする
+        .mount("/", routes![tests,new_test])
         .launch();
 }
