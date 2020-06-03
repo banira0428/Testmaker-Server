@@ -1,8 +1,23 @@
-use testmaker_rust::{db, filter};
+mod db;
+mod schema;
+mod models;
 
-#[tokio::main]
-async fn main() {
-    let database = db::init_db();
+use models::Test;
+use diesel::prelude::*;
 
-    warp::serve(filter::tests_api(database)).run(([127, 0, 0, 1], 3030)).await;
+#[macro_use]
+extern crate diesel;
+
+fn main() {
+    use self::schema::tests::dsl::*;
+
+    let db = db::establish_connection();
+
+    let results = tests.limit(5).load::<Test>(&db).expect("Error loading posts");
+
+    println!("Displaying {} tests", results.len());
+    for test in results {
+        println!("{}", test.name);
+        println!("-----------\n");
+    }
 }
