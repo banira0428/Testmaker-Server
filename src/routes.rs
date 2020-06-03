@@ -15,6 +15,19 @@ pub fn tests() -> Json<Vec<Test>> {
     Json(results)
 }
 
+#[get("/tests?<query>")]
+pub fn search_tests(query: String) -> Json<Vec<Test>> {
+    use self::schema::tests::dsl::*;
+    let connection = db::establish_connection();
+    let results = tests
+        .filter(name.ilike(format!("%{}%", query)))
+        .limit(50)
+        .load::<Test>(&connection)
+        .expect("Error loading posts");
+
+    Json(results)
+}
+
 #[post("/tests", format = "application/json", data = "<test>")]
 pub fn new_test(test: Json<NewTest>) -> String {
     use self::schema::tests;
