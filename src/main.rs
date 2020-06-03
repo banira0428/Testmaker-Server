@@ -1,23 +1,20 @@
-mod db;
-mod schema;
-mod models;
-
-use models::Test;
-use diesel::prelude::*;
+#![feature(proc_macro_hygiene)]
+#![feature(decl_macro)]
 
 #[macro_use]
 extern crate diesel;
+#[macro_use]
+extern crate rocket;
+
+mod db;
+mod schema;
+mod models;
+mod routes;
+
+use routes::*;
 
 fn main() {
-    use self::schema::tests::dsl::*;
-
-    let db = db::establish_connection();
-
-    let results = tests.limit(5).load::<Test>(&db).expect("Error loading posts");
-
-    println!("Displaying {} tests", results.len());
-    for test in results {
-        println!("{}", test.name);
-        println!("-----------\n");
-    }
+    rocket::ignite()
+        .mount("/", routes![tests])  // ここにルーティングをセットする
+        .launch();
 }
