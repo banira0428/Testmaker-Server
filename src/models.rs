@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use super::schema::tests;
 
 #[derive(Clone, Debug, Serialize, Deserialize, Queryable)]
 pub struct Test {
@@ -10,4 +11,16 @@ pub struct Test {
     comment: String,
     user_id: String,
     user_name: String
+}
+
+#[derive(Insertable)]
+#[table_name="tests"]
+pub struct NewTest<'a> {
+    pub name: &'a str,
+    pub color: &'a i32,
+    pub document_id: &'a str,
+    pub size: &'a i32,
+    pub comment: &'a str,
+    pub user_id: &'a str,
+    pub user_name: &'a str
 }
