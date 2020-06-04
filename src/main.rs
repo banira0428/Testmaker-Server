@@ -15,6 +15,6 @@ use routes::*;
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![tests,search_tests,new_test])
+        .mount("/", routes![tests,search_tests,new_test,delete_test])
         .launch();
 }

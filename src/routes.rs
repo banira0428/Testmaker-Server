@@ -40,3 +40,16 @@ pub fn new_test(test: Json<NewTest>) -> String {
 
     format!("Accepted post request!")
 }
+
+#[delete("/tests/<deleted_id>")]
+pub fn delete_test(deleted_id: String) -> String {
+    use self::schema::tests::dsl::*;
+
+    let connection = db::establish_connection();
+
+    diesel::delete(tests.filter(document_id.eq(deleted_id)))
+        .execute(&connection)
+        .expect("Error deleting test");
+
+    format!("Accepted delete request!")
+}
