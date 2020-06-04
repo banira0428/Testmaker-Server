@@ -1,1 +1,1 @@
-web: ROCKET_PORT=$PORT ./target/release/testmaker-rust
+web: ROCKET_PORT=$PORT ./target/release/testmaker_rust
