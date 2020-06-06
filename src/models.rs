@@ -1,5 +1,6 @@
 use serde::{Serialize, Deserialize};
 use super::schema::tests;
+use std::time::SystemTime;
 
 #[derive(Clone, Debug, Serialize, Deserialize, Queryable)]
 pub struct Test {
@@ -11,6 +12,7 @@ pub struct Test {
     pub comment: String,
     pub user_id: String,
     pub user_name: String,
+    pub created_at: SystemTime
 }
 
 #[derive(Insertable, Serialize, Deserialize)]

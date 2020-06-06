@@ -8,5 +8,6 @@ table! {
         comment -> Text,
         user_id -> Varchar,
         user_name -> Varchar,
+        created_at -> Timestamp,
     }
 }
