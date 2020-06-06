@@ -10,7 +10,10 @@ use crate::models::NewTest;
 pub fn tests() -> Json<Vec<Test>> {
     use self::schema::tests::dsl::*;
     let connection = db::establish_connection();
-    let results = tests.limit(50).load::<Test>(&connection).expect("Error loading posts");
+    let results = tests
+        .order_by(created_at.desc())
+        .limit(50)
+        .load::<Test>(&connection).expect("Error loading posts");
 
     Json(results)
 }
@@ -21,6 +24,7 @@ pub fn search_tests(query: String) -> Json<Vec<Test>> {
     let connection = db::establish_connection();
     let results = tests
         .filter(name.ilike(format!("%{}%", query)))
+        .order_by(created_at.desc())
         .limit(50)
         .load::<Test>(&connection)
         .expect("Error loading posts");
